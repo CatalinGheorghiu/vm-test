@@ -1,0 +1,57 @@
+.vevol-tabs {
+  margin: 2rem 0;
+}
+
+.vevol-tabs ul {
+  margin: 0;
+  padding: 0;
+  background-color: #FEFFFF;
+  list-style: none;
+}
+
+.tabs-container {
+  max-width: 550px;
+  background-color: #585AEB;
+  padding: 4rem 2rem;
+}
+
+[data-title-tab] {
+  display: flex;
+  width: 100%;
+  transition: background-color 0.5s ease-in-out;
+}
+
+[data-title-tab] .tab-title {
+  width: 100%;
+  height: 5rem;
+  text-align: center;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
+  color: unset;
+}
+
+[data-content-tab] {
+  display: none;
+  padding: 1.6rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+[data-content-tab].active {
+  display: block;
+}
+
+.tabs-title-container {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

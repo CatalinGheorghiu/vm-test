@@ -1,0 +1,106 @@
+{{ 'section-vevol-tabs.css' | asset_url | stylesheet_tag }}
+
+
+{%- style -%}
+  [data-title-tab] {
+    background-color: {{ section.settings.inactive_tab_bg }};
+    color: {{ section.settings.inactive_tab_text }};
+  }
+  
+  [data-title-tab].active {
+    background-color: {{ section.settings.active_tab_bg }};
+    color: {{ section.settings.active_tab_text }};
+  }
+{%- endstyle -%}
+
+<script
+    src="{{ 'vevol-tabs.js' | asset_url }}"
+    defer="defer"></script>
+<vevol-tabs>
+  <div
+      slot="vevol-tabs"
+      class="vevol-tabs page-width">
+    <h1>Vevol Media Tabs</h1>
+    
+    {%- if section.blocks.size > 0 -%}
+      <div class="tabs-container">
+        <ul class="tabs-title-container">
+          {%- for block in section.blocks -%}
+            <li data-title-tab="{{ forloop.index }}" {%- if forloop.index == 1 -%} class="active"{%- endif -%}>
+              <button
+                  class="tab-title"
+                  type="button">{{ block.settings.tab_title }}</button>
+            </li>
+          {%- endfor -%}
+        </ul>
+        
+        <ul class="tabs-content-container">
+          {%- for block in section.blocks -%}
+            <li data-content-tab="{{ forloop.index }}" {%- if forloop.index == 1 -%} class="active"{%- endif -%}>
+              <p class="tab-content">{{ block.settings.tab_content }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</vevol-tabs>
+
+{% schema %}
+{
+  "name": "Vevol Tabs",
+  "class": "vevol-tabs",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "active_tab_bg",
+      "label": "Active tab background color",
+      "default": "#feffff"
+    },
+    {
+      "type": "color",
+      "id": "active_tab_text",
+      "label": "Active tab text color",
+      "default": "#595aeb"
+    },
+    {
+      "type": "color",
+      "id": "inactive_tab_bg",
+      "label": "Inactive tab background color",
+      "default": "#e5e9fd"
+    },
+    {
+      "type": "color",
+      "id": "inactive_tab_text",
+      "label": "Inactive tab text color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Tab title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab content",
+          "default": "<p>Tab content</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vevol Tabs"
+    }
+  ]
+}
+{% endschema %}
